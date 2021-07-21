@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+//Routing
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+//Context
+import UserProvider from './context';
+
+//Styles
+import { GlobalStyle } from './GlobalStyle';
+import Header from './components/Header';
+import Home from './components/Home';
+import Login from './components/Login';
+import Movie from './components/Movie';
+import NotFound from './components/NotFound';
+
+const App = () => (
+  <Router>
+    <UserProvider>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path="/:movieId" element={<Movie />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+      <GlobalStyle />
+    </UserProvider>
+  </Router>
+);
 
 export default App;
